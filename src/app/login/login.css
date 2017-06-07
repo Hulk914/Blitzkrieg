@@ -1,3 +1,6 @@
+div.error{
+    color: red;
+}
 .LoginBox{
     width: 300px;
     height: 250px;

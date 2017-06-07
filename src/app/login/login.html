@@ -1,11 +1,19 @@
 <div class="LoginBox">
     <h2>Login</h2>
-    <form [formGroup]="userForm" novalidate (ngSubmit)="func()">
-        <input type="text" placeholder="Please Enter UserName" formControlName="username"><br>
-        <input type="password" placeholder="Please Enter Password" formControlName="password"><br>
-        <input type="submit" value="Login">
+    <form [formGroup]="userForm" novalidate (ngSubmit)="loggedIn(userForm)">
+        <input type="text" placeholder="Please Enter UserName" formControlName="username">
 
+        <div class="error" *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched">
+            Name is required
+        </div>
+        <div class="error" *ngIf="userForm.get('username').hasError('minlength') && userForm.get('username').touched">
+            Minimum Length is 4
+        </div><br>
+        <input type="password" placeholder="Please Enter Password" formControlName="password"><br>
+        <input type="submit" value="Login" [disabled]="userForm.invalid">
     </form>
+    <div *ngIf="somethingWrong" class="error">Enter correct credentials</div>
     <p>Form value: {{ userForm.value | json }}</p>
     <p>Form status: {{ userForm.status | json }}</p>
+    <p>Name value: {{ userForm.get('username').value }}</p>
 </div>
