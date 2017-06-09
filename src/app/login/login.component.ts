@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { GetData } from "../services/get-data.component";
+
 @Component({
     selector: 'login',
     templateUrl: './login.html',
@@ -14,28 +16,33 @@ export class LoginComponent {
     })*/
     userForm: FormGroup;
     somethingWrong: boolean;
-    constructor(private router: Router, private fb: FormBuilder) {
+    constructor(private router: Router, private fb: FormBuilder, private getDataV: GetData) {
         this.somethingWrong = false;
         this.createForm();
     }
 
     createForm() {
         this.userForm = this.fb.group({
-            username: ['', [Validators.required,Validators.minLength(4)]],
+            username: ['', [Validators.required, Validators.minLength(4)]],
             password: ['', Validators.required]
         })
     }
 
     loggedIn(): void {
         console.log("here");
-        console.log(this.userForm.value);
-        if (this.userForm.value.username == "Ayush" && this.userForm.value.password == "Ayush") {
-            this.router.navigate(['/firstPage']);
-            this.somethingWrong = false;
-        }
-        else
-            this.somethingWrong = true;
-        console.log(this.somethingWrong);
+        this.getDataV.getData()
+            .subscribe((resUser: any) => {
+                console.log(resUser);
+                console.log(this.userForm.value);
+                if (this.userForm.value.username == resUser.username && this.userForm.value.password == resUser.password) {
+                    this.router.navigate(['/firstPage']);
+                    this.somethingWrong = false;
+                }
+                else
+                    this.somethingWrong = true;
+                console.log("Something wrong : " + this.somethingWrong);
+            });
+
     }
 
 }
