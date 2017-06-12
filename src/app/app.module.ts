@@ -7,9 +7,10 @@ import { HomePage } from "./home-page/home-page.component";
 import { AppRoutingModule } from "./app-routing.module";
 import { HttpModule } from "@angular/http";
 import { GetData } from "./services/get-data.component";
+import { GrowlModule } from "primeng/primeng";
 
 @NgModule({
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpModule, GrowlModule],
   declarations: [AppComponent, LoginComponent, HomePage],
   bootstrap: [AppComponent],
   providers: [GetData]

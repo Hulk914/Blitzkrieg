@@ -1,10 +1,14 @@
+<div>
+    <p-growl [(value)]="msgs"></p-growl>
+</div>
+
 <div class="LoginBox">
     <h2>Login</h2>
     <form [formGroup]="userForm" novalidate (ngSubmit)="loggedIn(userForm)">
         <input type="text" placeholder="Please Enter UserName" formControlName="username">
 
-        <div class="error" *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched">
-            Name is required
+        <div class="error" *ngIf="userForm.get('username').hasError('required') && userForm.get('username').touched" >
+        Username cannot be empty
         </div>
         <div class="error" *ngIf="userForm.get('username').hasError('minlength') && userForm.get('username').touched">
             Minimum Length is 4
