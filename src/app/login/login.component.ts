@@ -41,14 +41,27 @@ export class LoginComponent {
                     this.router.navigate(['/firstPage']);
                     this.somethingWrong = false;
                 }
-                else
+                else {
                     this.somethingWrong = true;
-                this.msgs.push({ severity: 'error', summary: 'Login Failed', detail: 'Incorrect Credentials' });
-                setTimeout(() => this.hide(), 3000);//growler should go automatically, this is failsafe.
-                console.log("Something wrong : " + this.somethingWrong);
+                    this.issueHandler();
+                }
             });
 
     }
+
+    issueHandler(): void {
+        if (this.userForm.get('username').hasError('required'))
+            this.msgs.push({ severity: 'warn', summary: 'USERNAME', detail: 'Please enter username.' });
+        else if (this.userForm.get('username').hasError('minlength'))
+            this.msgs.push({ severity: 'warn', summary: 'USERNAME', detail: 'Minimum 4 characters required.' });
+        else if (this.userForm.get('password').hasError('required'))
+            this.msgs.push({ severity: 'warn', summary: 'PASSWORD', detail: 'Password cannot be empty' });
+        else
+            this.msgs.push({ severity: 'error', summary: 'AUTHENTICATION', detail: 'Username or password mismatch.' });
+        setTimeout(() => this.hide(), 5000);//growler should go automatically, this is failsafe.
+        console.log("Something wrong : " + this.somethingWrong);
+    }
+
     hide() {
         this.msgs = [];
     }
