@@ -18,8 +18,9 @@ export class LoginComponent {
     msgs: Message[] = [];
 
     userForm: FormGroup;
+    signupForm: FormGroup;
     somethingWrong: boolean;
-    constructor(private router: Router, private fb: FormBuilder, private getDataV: GetData) {
+    constructor(private router: Router, private fb: FormBuilder, private apiService: GetData) {
         this.somethingWrong = false;
         this.createForm();
     }
@@ -29,11 +30,31 @@ export class LoginComponent {
             username: ['', [Validators.required, Validators.minLength(4)]],
             password: ['', Validators.required]
         })
+
+        this.signupForm = this.fb.group({
+            username: ['', [Validators.required, Validators.minLength(4)]],
+            password: ['', Validators.required],
+            repeatPassword: ['', Validators.required],
+            email: ['', Validators.required]
+        })
+    }
+
+    signUp(): void {
+        console.log("hello");
+        let uname= this.signupForm.get('username').value;
+        console.log(uname);
+        let password= this.signupForm.get('password').value;
+        let email= this.signupForm.get('email').value;
+        this.apiService.addUser(uname,password,email)
+            .subscribe((resAdd: any) => {
+                console.log(resAdd);
+            });
+        
     }
 
     loggedIn(): void {
         console.log("here");
-        this.getDataV.getData()
+        this.apiService.getData()
             .subscribe((resUser: any) => {
                 console.log(resUser);
                 console.log(this.userForm.value);
