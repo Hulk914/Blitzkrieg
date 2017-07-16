@@ -15,7 +15,6 @@ export class GetData {
     }
 
     addUser(username: string, password: string, email: string): any {
-        let headers = new Headers();
         console.log("in get data : ");
         return this._http.post(this._addUrl, { "username": username, "password": password, "email": email })
             .map((response: Response) => response.json());
