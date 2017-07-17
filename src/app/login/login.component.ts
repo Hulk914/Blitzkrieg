@@ -41,31 +41,34 @@ export class LoginComponent {
 
     signUp(): void {
         console.log("hello");
-        let uname= this.signupForm.get('username').value;
+        let uname = this.signupForm.get('username').value;
         console.log(uname);
-        let password= this.signupForm.get('password').value;
-        let email= this.signupForm.get('email').value;
-        this.apiService.addUser(uname,password,email)
+        let password = this.signupForm.get('password').value;
+        let email = this.signupForm.get('email').value;
+        this.apiService.addUser(uname, password, email)
             .subscribe((resAdd: any) => {
                 console.log(resAdd);
             });
-        
+
     }
 
     loggedIn(): void {
         console.log("here");
-        this.apiService.getData()
+        this.apiService.getData(this.userForm.value.username, this.userForm.value.password)
             .subscribe((resUser: any) => {
                 console.log(resUser);
                 console.log(this.userForm.value);
-                if (this.userForm.value.username == resUser.username && this.userForm.value.password == resUser.password) {
-                    this.router.navigate(['/firstPage']);
-                    this.somethingWrong = false;
-                }
-                else {
-                    this.somethingWrong = true;
-                    this.issueHandler();
-                }
+                this.router.navigate(['/firstPage']);
+                // if (this.userForm.value.username == resUser.username && this.userForm.value.password == resUser.password) {
+                //     this.router.navigate(['/firstPage']);
+                //     this.somethingWrong = false;
+                // }
+                // else {
+                //     this.somethingWrong = true;
+                //     this.issueHandler();
+                // }
+            }, (err: any) => {
+                console.log("error aaya bhaago error aaya" + err); this.issueHandler();
             });
 
     }
