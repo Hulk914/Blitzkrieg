@@ -1,0 +1,16 @@
+.header{
+    height: 10%;
+}
+
+.HeadImg{
+    background: url("../app/resources/HeaderHome.jpg");
+    height: 450px;
+    width: 100%;
+}
+
+.imgForm{
+    position: relative;
+    top: 150px;
+    left: 50px;
+    width: 80px;
+}
