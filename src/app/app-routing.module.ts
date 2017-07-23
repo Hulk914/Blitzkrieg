@@ -5,7 +5,7 @@ import { HomePage } from "../app/home-page/home-page.component";
 
 const routes: Routes = [
    
-    { path: 'firstPage', component: HomePage },
+    { path: 'HomePage', component: HomePage },
     { path: 'login', component: LoginComponent},
     { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

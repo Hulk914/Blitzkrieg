@@ -1,9 +1,15 @@
-<div style="height:100vh">
-    <div class="header">Header</div>
-    <div class="HeadImg">
-         <form> 
-        <!-- <img src="../app/resources/HeaderHome.jpg" height="450px" width="100%"> -->
-         <input type="text" class="imgForm" pInputText/> 
-         </form> 
+ <div style="height:100vh"> 
+    <div class="header">
+        <div id="user" *ngIf="username">Welcome {{username}}</div>
     </div>
-</div>
+    <div id="carousal">
+        <p-carousel headerText="Services" [value]="arr" numVisible="3" circular="circular" autoplayInterval="5000">
+            <ng-template let-ar pTemplate="item">
+                <div id="insideCarousal">
+                <img src="..\app\resources\{{ar}}.jpg" height="100" width="100%">
+                <h3>Service Item</h3>
+                </div>
+            </ng-template>
+        </p-carousel>
+    </div>
+ </div> 

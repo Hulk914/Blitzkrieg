@@ -58,7 +58,9 @@ export class LoginComponent {
             .subscribe((resUser: any) => {
                 console.log(resUser);
                 console.log(this.userForm.value);
-                this.router.navigate(['/firstPage']);
+                console.log(resUser.username);
+                localStorage.setItem('username',resUser.username);
+                this.router.navigate(['HomePage']);
                 // if (this.userForm.value.username == resUser.username && this.userForm.value.password == resUser.password) {
                 //     this.router.navigate(['/firstPage']);
                 //     this.somethingWrong = false;
@@ -89,4 +91,8 @@ export class LoginComponent {
     hide() {
         this.msgs = [];
     }
+
+    // ngOnDestroy(){
+    //     this.sharedUsername.username=
+    // }
 }

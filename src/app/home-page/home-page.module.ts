@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { HomePage } from "./home-page.component";
-import { InputTextModule } from "primeng/primeng";
+import { CarouselModule } from "primeng/primeng";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
-    imports:[InputTextModule],
+    imports:[CarouselModule, CommonModule],
     declarations:[HomePage],
     providers:[]
 })
